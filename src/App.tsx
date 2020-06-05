@@ -1,16 +1,41 @@
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld';
+import {Component, Vue} from 'vue-property-decorator';
 
-import './App.css'
+import TodoList from '@/components/TodoList';
+import Calendar from '@/components/Calendar';
 
-@Component
+import {TodoItemState} from '@/store/todoList';
+
+import styles from './App.css?module';
+
+@Component({
+    components: {
+        Calendar,
+        TodoList,
+    },
+})
 export default class App extends Vue {
-  render() {
-    return (
-      <div id="app">
-        <img alt="Vue logo" src={require('./assets/logo.png')} />
-        <HelloWorld msg1="Welcome to Your Vue.js + TypeScript App"/>
-      </div>
-    )
-  }
+    get todos(): TodoItemState[] {
+        return this.$store.state.todoList.todos[this.$store.state.calendar.selectedDate] || [];
+    }
+
+    render() {
+        return (
+            <div id="app" class={styles.app}>
+                <div class={styles.centerWrapper}>
+                    <div class={styles.heightWrapper}>
+                        <div class={styles.main}>
+                            <div class={styles.calendar}>
+                                <Calendar/>
+                            </div>
+                            <div class={styles.todoList}>
+                                <TodoList
+                                    todos={this.todos}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }

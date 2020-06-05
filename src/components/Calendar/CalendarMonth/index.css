@@ -1,0 +1,12 @@
+.weekHeader {
+    padding-left: 8%;
+}
+
+.weeks {
+    padding: 0 5%;
+
+    font-size: 14.5366px;
+    line-height: 18px;
+
+    color: #7C86A2;
+}

@@ -1,0 +1,53 @@
+/* сбрасываем стандартные стили */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.main {
+  padding: 7.5% 7%;
+}
+
+.title {
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.59375px;
+
+  color: #8C96AB;
+
+  margin-bottom: 5%;
+}
+
+.todo {
+  padding-bottom: 4%;
+
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.59375px;
+  color: #A2ABBF;
+}
+
+.addInput {
+  height: 32px;
+  padding: 7px 14px 6px 14px;
+  margin-left: 35px;
+
+  box-sizing: border-box;
+  border: 1px solid #D8DCE6;
+  border-radius: 4px;
+
+  font-size: 15px;
+  line-height: 18px;
+  letter-spacing: 0.59375px;
+  color: #A2ABBF;
+}
+
+.addInput::placeholder {
+  font-family: Helvetica sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+  color: #BFC4CC;
+}

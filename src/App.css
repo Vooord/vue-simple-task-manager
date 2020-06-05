@@ -1,8 +1,50 @@
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
-  }
+.app {
+    min-height: inherit;
+    display: flex;
+
+    background: #FFFFFF;
+
+    font-family: Helvetica Neue sans-serif;
+    font-style: normal;
+    font-weight: 500;
+
+    /* примерно так было на макете */
+    padding-bottom: 5%;
+    padding-right: 1%;
+}
+
+/* Устанавливает пропоцию ширины и центрирует */
+.centerWrapper {
+    width: 65%;
+    margin: auto;
+}
+
+/* Устанавлиает пропорцию высоты (padding-top) относительно centerWrapper */
+.heightWrapper {
+    width: 100%;
+    padding-top: 35%;
+    position: relative;
+    height: 0;
+}
+
+.main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.calendar,
+.todoList {
+    width: 50%;
+    margin: 0 17px;
+    box-sizing: border-box;
+
+    box-shadow: 0 2px 23px #EDEDED;
+    border-radius: 6px;
+    overflow: auto;
+}

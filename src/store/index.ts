@@ -1,15 +1,20 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+import {calendar, CalendarState} from '@/store/calendar';
+import {todoList, TodoListState} from '@/store/todoList';
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+
+Vue.use(Vuex);
+
+export interface AppState {
+  calendar: CalendarState,
+  todoList: TodoListState,
+}
+
+export default new Vuex.Store<AppState>({
+    modules: {
+        calendar,
+        todoList,
+    },
+});
