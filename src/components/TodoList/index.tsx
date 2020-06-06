@@ -57,7 +57,6 @@ export default class TodoList extends VueComponent<TodoListProps> {
             <div class={styles.main}>
                 <h3 class={styles.title}>События</h3>
                 <div>
-                    {/*{!this.todos.length && <p>В этот день пока нет событий</p>}*/}
                     <ul>
                         {this.todos.map(todo =>
                             <TodoItem

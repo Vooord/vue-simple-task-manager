@@ -3,40 +3,40 @@ import {VueComponent} from '@/shims-vue';
 
 import styles from './index.css?module';
 
-import CalendarWeek from '../CalendarWeek';
 import CalendarDateHeader from '../CalendarDateHeader';
+import CalendarDate from '../CalendarDate';
 
 import {DAYS_NAMES} from '../constants';
 
 interface Props {
-    datesPerWeek: number[][],
+    dates: number[],
 }
 
 @Component({
     components: {
         CalendarDateHeader,
-        CalendarWeek,
+        CalendarDate,
     },
 })
 export default class CalendarMonth extends VueComponent<Props> {
     @Prop()
-    private datesPerWeek!: number[][];
+    private dates!: number[];
 
     render() {
         return (
             <div>
-                <div class={styles.weekHeader}>
+                <div class={styles.datesHeader}>
                     {DAYS_NAMES.map(day =>
                         <CalendarDateHeader
                             day={day}
                             key={day}
                         />)}
                 </div>
-                <div class={styles.weeks}>
-                    {this.datesPerWeek.map((weekDates, index) =>
-                        <CalendarWeek
+                <div class={styles.dates}>
+                    {this.dates.map((date, index) =>
+                        <CalendarDate
                             key={index}
-                            weekDates={weekDates}
+                            date={date}
                         />)}
                 </div>
             </div>

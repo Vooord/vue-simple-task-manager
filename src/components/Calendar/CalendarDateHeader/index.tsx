@@ -15,7 +15,7 @@ export default class CalendarDateHeader extends VueComponent<Props> {
 
     render() {
         return (
-            <div class={styles.main}>
+            <div>
                 <span class={styles.title}>
                     {this.day}
                 </span>

@@ -20,18 +20,16 @@ export default class TodoItem extends VueComponent<Props> {
     private onToggleCompleted!: (todo: TodoItemState) => void;
 
     render() {
-        const todoClasses = [styles.todoText];
-        if (this.todo.completed) {
-            todoClasses.push(styles.todoTextCompleted);
-        }
-
         return (
             <div class={styles.main}>
                 <button
-                    class={styles.checkedButton}
+                    class={styles.completedButton}
                     onclick={() => this.$emit('toggleCompleted', this.todo)}
                 />
-                <li class={todoClasses.join(' ')}>{this.todo.title}</li>
+                <li
+                    class={styles.todoText}
+                    completed={this.todo.completed}
+                >{this.todo.title}</li>
             </div>
         );
     }

@@ -1,41 +1,54 @@
-.title {
-    margin: auto;
-}
-.dateWrapper {
-    width: 8.7%;
+.main {
     height: 0;
-    padding-bottom: 8.7%;
+    padding-bottom: 100%;
+    width: 100%;
     position: relative;
+}
 
-    margin-right: auto;
+.circle {
+    visibility: hidden;
+    border-radius: 50%;
+    border: 2px solid #7ed5fc;
+}
 
+.circle[today],
+.main:hover div,
+.circle[selected] {
+    visibility: visible;
+}
+
+.circle[selected] {
+    background: linear-gradient(0deg, #7ed5fc 0%, #90d9fa 100%);
+}
+
+.circle,
+.dateWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.dateWrapper {
+    display: flex;
 }
 
 .date {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    margin: auto;
 
     font-size: 14px;
 }
 
-.selected {
-    color: #FFFFFF;
-    border-radius: 50%;
-    background: linear-gradient(0deg, #7ED5FC 0%, #90d9fa 100%);
-}
-
-.today,
-.date:hover {
-    border-radius: 50%;
-    border: 2px solid #6acbfc;
-}
-
-.filled {
+.date[filled] {
     color: #AA3434;
 }
 
-.hidden {
+.date[selected] {
+    color: #FFFFFF;
+}
+
+.date[hidden] {
     visibility: hidden;
 }

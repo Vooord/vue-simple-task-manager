@@ -1,9 +1,20 @@
-.weekHeader {
-    padding-left: 8%;
+.datesHeader,
+.dates {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(20px, 1fr));
+    column-gap: 5.5%;
+
+    padding: 0 8% 0 5.5%;
 }
 
-.weeks {
-    padding: 0 5%;
+.datesHeader {
+    padding-top: 7%;
+    padding-bottom: 5%;
+    text-align: end;
+}
+
+.dates {
+    text-align: center;
 
     font-size: 14.5366px;
     line-height: 18px;

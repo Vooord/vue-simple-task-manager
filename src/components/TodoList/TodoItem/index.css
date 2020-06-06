@@ -1,9 +1,8 @@
 .main {
     display: flex;
-    flex-direction: row;
 }
 
-.checkedButton {
+.completedButton {
     width: 16px;
     height: 16px;
 
@@ -15,10 +14,8 @@
     padding: 0 19px;
 
 }
-.todoText:hover {
-}
 
-.todoTextCompleted {
+.todoText[completed] {
     text-decoration: line-through;
 }
 

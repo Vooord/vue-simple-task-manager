@@ -33,30 +33,23 @@ export default class CalendarDate extends VueComponent<Props> {
     }
 
     render() {
-        const dateClasses = [styles.date];
-        if (this.date === 0) {
-            dateClasses.push(styles.hidden);
-        }
-
-        if (this.isFilled && !this.isSelected) {
-            dateClasses.push(styles.filled);
-        }
-
-        if (this.isSelected) {
-            dateClasses.push(styles.selected);
-        }
-
-        if (this.isToday) {
-            dateClasses.push(styles.today);
-        }
-
         return (
-            <div class={styles.dateWrapper}>
+            <div
+                class={styles.main}
+                onClick={this.selectDate}
+            >
                 <div
-                    class={dateClasses.join(' ')}
-                    onClick={this.selectDate}
-                >
-                    <span class={styles.title}>{ this.date }</span>
+                    class={styles.circle}
+                    today={this.isToday}
+                    selected={this.isSelected}
+                />
+                <div class={styles.dateWrapper}>
+                    <span
+                        class={styles.date}
+                        filled={this.isFilled}
+                        selected={this.isSelected}
+                        hidden={this.date === 0}
+                    >{ this.date }</span>
                 </div>
             </div>
         );
