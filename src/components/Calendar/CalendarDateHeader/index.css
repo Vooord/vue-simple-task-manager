@@ -1,6 +1,13 @@
+.main {
+    display: flex;
+}
+
 .title {
+    margin: auto 0 auto auto;
+
     font-size: 15.655px;
     line-height: 19px;
+    text-transform: capitalize;
 
     color: rgba(52, 72, 94, 0.53);
 }

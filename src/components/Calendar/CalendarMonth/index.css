@@ -3,13 +3,14 @@
     display: grid;
     grid-template-columns: repeat(7, minmax(20px, 1fr));
     column-gap: 5.5%;
+    grid-auto-rows: 1fr;
 
     padding: 0 8% 0 5.5%;
 }
 
 .datesHeader {
-    padding-top: 7%;
-    padding-bottom: 5%;
+    padding-top: 6%;
+    padding-bottom: 4%;
     text-align: end;
 }
 
@@ -20,4 +21,19 @@
     line-height: 18px;
 
     color: #7C86A2;
+}
+
+.dates::before,
+.datesHeader::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+
+.dates > *:first-child,
+.datesHeader > *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
 }

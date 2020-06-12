@@ -1,6 +1,8 @@
 import {Component, Prop} from 'vue-property-decorator';
 import {VueComponent} from '@/shims-vue';
 
+import CalendarContainer from '@/containers/Calendar';
+
 import styles from './index.css?module';
 
 import CalendarDateHeader from '../CalendarDateHeader';
@@ -10,17 +12,28 @@ import {DAYS_NAMES} from '../constants';
 
 interface Props {
     dates: number[],
+    todos: CalendarContainer['todos'],
+    today: CalendarContainer['today'],
+    selectedDate: CalendarContainer['selectedDate'],
+    selectDate: CalendarContainer['selectDate'],
 }
 
-@Component({
-    components: {
-        CalendarDateHeader,
-        CalendarDate,
-    },
-})
+@Component
 export default class CalendarMonth extends VueComponent<Props> {
     @Prop()
-    private dates!: number[];
+    private dates!: Props['dates'];
+
+    @Prop()
+    private today!: Props['today']
+
+    @Prop()
+    private selectedDate!: Props['selectedDate']
+
+    @Prop()
+    private todos!: Props['todos']
+
+    @Prop()
+    private selectDate!: Props['selectDate']
 
     render() {
         return (
@@ -37,6 +50,10 @@ export default class CalendarMonth extends VueComponent<Props> {
                         <CalendarDate
                             key={index}
                             date={date}
+                            isSelected={date === this.selectedDate}
+                            isToday={date === this.today}
+                            isFilled={!!(this.todos[date] && this.todos[date].length)}
+                            selectDate={this.selectDate}
                         />)}
                 </div>
             </div>

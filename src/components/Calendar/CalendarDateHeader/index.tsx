@@ -11,11 +11,11 @@ interface Props {
 @Component
 export default class CalendarDateHeader extends VueComponent<Props> {
     @Prop()
-    private day!: string;
+    private day!: Props['day'];
 
     render() {
         return (
-            <div>
+            <div class={styles.main}>
                 <span class={styles.title}>
                     {this.day}
                 </span>

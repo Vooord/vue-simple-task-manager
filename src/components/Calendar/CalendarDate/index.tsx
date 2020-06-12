@@ -1,56 +1,50 @@
 import {Component, Prop} from 'vue-property-decorator';
 import {VueComponent} from '@/shims-vue';
 
+import CalendarContainer from '@/containers/Calendar';
+
 import styles from './index.css?module';
 
-import {DATE_SELECT, wrapAction as wrapCalendarAction} from '@/store/calendar';
-import {TodoItemState} from '@/store/todoList';
 
 interface Props {
     date: number,
+    isToday: boolean,
+    isSelected: boolean,
+    isFilled: boolean,
+    selectDate: CalendarContainer['selectDate'],
 }
 
 @Component
 export default class CalendarDate extends VueComponent<Props> {
     @Prop()
-    private date!: number;
+    private date!: Props['date'];
 
-    get isToday() {
-        return this.$store.state.calendar.todayDate === this.date;
-    }
+    @Prop()
+    private isToday!: Props['isToday']
 
-    get isSelected() {
-        return this.$store.state.calendar.selectedDate === this.date;
-    }
+    @Prop()
+    private isSelected!: Props['isSelected']
 
-    get isFilled() {
-        const currentTodos: TodoItemState[] = this.$store.state.todoList.todos[this.date];
-        return !!(currentTodos && currentTodos.length);
-    }
+    @Prop()
+    private isFilled!: Props['isFilled']
 
-    selectDate() {
-        this.$store.dispatch(wrapCalendarAction(DATE_SELECT), this.date);
-    }
+    @Prop()
+    private selectDate!: Props['selectDate']
 
     render() {
         return (
             <div
                 class={styles.main}
-                onClick={this.selectDate}
+                onClick={() => this.selectDate(this.date)}
+                today={this.isToday}
+                selected={this.isSelected}
+                hidden={this.date === 0}
             >
-                <div
-                    class={styles.circle}
-                    today={this.isToday}
+                <span
+                    class={styles.date}
+                    filled={this.isFilled}
                     selected={this.isSelected}
-                />
-                <div class={styles.dateWrapper}>
-                    <span
-                        class={styles.date}
-                        filled={this.isFilled}
-                        selected={this.isSelected}
-                        hidden={this.date === 0}
-                    >{ this.date }</span>
-                </div>
+                >{ this.date }</span>
             </div>
         );
     }

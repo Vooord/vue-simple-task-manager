@@ -1,71 +1,50 @@
 import {Component, Prop} from 'vue-property-decorator';
 import {VueComponent} from '@/shims-vue';
 
-import TodoItem from './TodoItem';
+import TodoListContainer from '@/containers/TodoList';
 
-import {
-    TodoItemState,
-    wrapAction as wrapTodoListAction,
-    NEW_TODO_ADD,
-    NEW_TODO_CHANGE,
-    TOGGLE_COMPLETED,
-} from '@/store/todoList';
+import TodoItem from './TodoItem';
 
 import styles from './index.css?module';
 
 
-interface TodoListProps {
-    todos: TodoItemState[]
+interface Props {
+    todos: TodoListContainer['todos'],
+    newTodo: TodoListContainer['newTodo'],
+    toggleCompleted: TodoListContainer['toggleCompleted'],
+    newTaskChange: TodoListContainer['newTaskChange'],
+    addNewTodo: TodoListContainer['addNewTodo'],
 }
 
-@Component({
-    components: {
-        TodoItem,
-    },
-})
-export default class TodoList extends VueComponent<TodoListProps> {
+@Component
+export default class TodoList extends VueComponent<Props> {
     @Prop()
-    private todos!: TodoItemState[];
+    private todos!: Props['todos'];
 
-    get selectedDate(): number {
-        return this.$store.state.calendar.selectedDate;
-    }
+    @Prop()
+    private newTodo!: Props['newTodo']
 
-    get newTodo(): string {
-        return this.$store.state.todoList.newTodo;
-    }
+    @Prop()
+    private toggleCompleted!: Props['toggleCompleted']
 
-    toggleCompleted(todo: TodoItemState) {
-        this.$store.dispatch(wrapTodoListAction(TOGGLE_COMPLETED), {
-            todo,
-            date: this.selectedDate,
-        });
-    }
+    @Prop()
+    private newTaskChange!: Props['newTaskChange']
 
-    newTaskChange(e: { currentTarget: HTMLInputElement & EventTarget }) {
-        this.$store.dispatch(wrapTodoListAction(NEW_TODO_CHANGE), e.currentTarget.value);
-    }
-
-    addNewTodo(e: KeyboardEvent) {
-        if (e.key === 'Enter') {
-            this.$store.dispatch(wrapTodoListAction(NEW_TODO_ADD), {date: this.selectedDate});
-        }
-    }
+    @Prop()
+    private addNewTodo!: Props['addNewTodo']
 
     render() {
         return (
             <div class={styles.main}>
                 <h3 class={styles.title}>События</h3>
                 <div>
-                    <ul>
-                        {this.todos.map(todo =>
-                            <TodoItem
-                                class={styles.todo}
-                                key={todo.id}
-                                todo={todo}
-                                onToggleCompleted={this.toggleCompleted}
-                            />)}
-                    </ul>
+                    {this.todos.map(todo =>
+                        <TodoItem
+                            class={styles.todo}
+                            key={todo.id}
+                            todo={todo}
+                            onToggleCompleted={this.toggleCompleted}
+                        />)}
                 </div>
                 <input
                     class={styles.addInput}

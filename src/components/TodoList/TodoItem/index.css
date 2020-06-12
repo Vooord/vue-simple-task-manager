@@ -2,7 +2,12 @@
     display: flex;
 }
 
+.main[completed] {
+    text-decoration: line-through;
+}
+
 .completedButton {
+    margin: 0;
     width: 16px;
     height: 16px;
 
@@ -12,10 +17,4 @@
 
 .todoText {
     padding: 0 19px;
-
 }
-
-.todoText[completed] {
-    text-decoration: line-through;
-}
-

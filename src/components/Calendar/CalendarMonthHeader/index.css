@@ -8,5 +8,6 @@
     line-height: 18px;
     letter-spacing: 0.59375px;
 
+    text-transform: capitalize;
     color: #6B7897;
 }

@@ -1,24 +1,39 @@
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import {VueComponent} from '@/shims-vue';
+
+import CalendarContainer from '@/containers/Calendar';
 
 import CalendarMonthHeader from './CalendarMonthHeader';
 import CalendarMonth from './CalendarMonth';
 
+interface Props {
+    year: CalendarContainer['year'],
+    month: CalendarContainer['month'],
+    todos: CalendarContainer['todos'],
+    today: CalendarContainer['today'],
+    selectedDate: CalendarContainer['selectedDate'],
+    selectDate: CalendarContainer['selectDate'],
+}
 
-@Component({
-    components: {
-        CalendarMonthHeader,
-        CalendarMonth,
-    },
-})
-export default class Calendar extends VueComponent {
-    get month() {
-        return this.$store.state.calendar.month;
-    }
+@Component
+export default class Calendar extends VueComponent<Props> {
+    @Prop()
+    private year!: Props['year']
 
-    get year() {
-        return this.$store.state.calendar.year;
-    }
+    @Prop()
+    private month!: Props['month']
+
+    @Prop()
+    private todos!: Props['todos']
+
+    @Prop()
+    private today!: Props['today']
+
+    @Prop()
+    private selectedDate!: Props['selectedDate']
+
+    @Prop()
+    private selectDate!: Props['selectDate']
 
     // день недели первого дня месяца (0 - пн, 6 - вск)
     get firstDay() {
@@ -33,21 +48,29 @@ export default class Calendar extends VueComponent {
 
     get dates() {
         const {numDays, firstDay} = this;
-        const dates = new Array(numDays + firstDay).fill(0);
-        for (let i = firstDay; i < numDays + firstDay; i++) {
-            dates[i] = i + 1;
+        const dates: number[] = [];
+        for (let _ = 0; _ < firstDay; _++) {
+            dates.push(0);
         }
-        console.log(dates);
+        for (let date = 1; date <= numDays; date++) {
+            dates.push(date);
+        }
         return dates;
     }
-
 
     render() {
         return (
             <div>
-                <CalendarMonthHeader />
+                <CalendarMonthHeader
+                    monthNumber={this.month}
+                    year={this.year}
+                />
                 <CalendarMonth
                     dates={this.dates}
+                    today={this.today}
+                    selectedDate={this.selectedDate}
+                    todos={this.todos}
+                    selectDate={this.selectDate}
                 />
             </div>
         );
