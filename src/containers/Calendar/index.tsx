@@ -4,7 +4,7 @@ import CalendarComponent from '@/components/Calendar';
 
 import {useStore} from 'vuex-simple';
 import {RootModule} from '@/store/root';
-import {DATE_SELECT, wrapAction as wrapCalendarAction} from '@/store/modules/calendar';
+import {DATE_SELECT} from '@/store/modules/calendar';
 
 @Component
 export default class Calendar extends Vue {
@@ -30,8 +30,8 @@ export default class Calendar extends Vue {
         return this.store.todoList.todos;
     }
 
-    selectDate(date: number) {
-        this.$store.dispatch(wrapCalendarAction(DATE_SELECT), date);
+    selectDate(date: number): void {
+        this.store.calendar[DATE_SELECT](date);
     }
 
     render() {

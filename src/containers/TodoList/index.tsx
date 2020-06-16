@@ -10,7 +10,6 @@ import {
     NEW_TODO_CHANGE,
     TodoItemState,
     TOGGLE_COMPLETED,
-    wrapAction as wrapTodoListAction,
 } from '@/store/modules/todoList';
 
 import App from '@/App';
@@ -35,20 +34,20 @@ export default class TodoList extends VueComponent<Props> {
         return this.store.todoList.newTodo;
     }
 
-    toggleCompleted(todo: TodoItemState) {
-        this.$store.dispatch(wrapTodoListAction(TOGGLE_COMPLETED), {
+    toggleCompleted(todo: TodoItemState): void {
+        this.store.todoList[TOGGLE_COMPLETED]({
             todo,
             date: this.selectedDate,
         });
     }
 
-    newTaskChange(e: { currentTarget: HTMLInputElement & EventTarget }) {
-        this.$store.dispatch(wrapTodoListAction(NEW_TODO_CHANGE), e.currentTarget.value);
+    newTaskChange(e: { currentTarget: HTMLInputElement & EventTarget }): void {
+        this.store.todoList[NEW_TODO_CHANGE](e.currentTarget.value);
     }
 
-    addNewTodo(e: KeyboardEvent) {
+    addNewTodo(e: KeyboardEvent): void {
         if (e.key === 'Enter') {
-            this.$store.dispatch(wrapTodoListAction(NEW_TODO_ADD), {date: this.selectedDate});
+            this.store.todoList[NEW_TODO_ADD]( {date: this.selectedDate});
         }
     }
 

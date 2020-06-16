@@ -19,8 +19,6 @@ const DEFAULT_TODOS = {
 };
 
 
-export const wrapAction = (action: string) => `todoList/${action}`;
-
 export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';
 
 export const NEW_TODO_CHANGE = 'NEW_TASK_CHANGE';

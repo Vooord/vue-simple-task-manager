@@ -47,11 +47,8 @@ export default class Calendar extends VueComponent<Props> {
     }
 
     get dates() {
-        const {numDays, firstDay} = this;
+        const {numDays} = this;
         const dates: number[] = [];
-        for (let _ = 0; _ < firstDay; _++) {
-            dates.push(0);
-        }
         for (let date = 1; date <= numDays; date++) {
             dates.push(date);
         }
@@ -66,6 +63,7 @@ export default class Calendar extends VueComponent<Props> {
                     year={this.year}
                 />
                 <CalendarMonth
+                    firstDay={this.firstDay}
                     dates={this.dates}
                     today={this.today}
                     selectedDate={this.selectedDate}
